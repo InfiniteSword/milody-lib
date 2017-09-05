@@ -7,7 +7,7 @@ export default class application {
      * Initialize a new `Application`.
      *
      * @param {DOMElement|String} input
-     * @api private
+     * @api public
      */
     constructor(input) {
         this.middleware = [];
@@ -15,6 +15,12 @@ export default class application {
         this.init(input);
     }
 
+    /**
+     * Create Audio element.
+     *
+     * @param {DOMElement|String} input
+     * @api private
+     */
     init(input) {
         window.AudioContext = window.AudioContext || window.webkitAudioContext || window.mozAudioContext || window.msAudioContext;
         window.requestAnimationFrame = window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || window.msRequestAnimationFrame || function (callback) {
@@ -24,6 +30,10 @@ export default class application {
 
         if (isElement(input)) {
             this.audio = input;
+        } else {
+            let audio = document.createElement('audio');
+            audio.setAttribute('src', input);
+            this.audio = audio;
         }
     }
 
