@@ -44,6 +44,6 @@
     "lodash.iselement": "4.1.1"
   },
   "dependencies": {
-    "lodash.iselement": "4.1.1"
+    "lodash.iselement": "^4.1.1"
   }
 }

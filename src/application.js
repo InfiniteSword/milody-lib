@@ -1,4 +1,4 @@
-import isElement from 'lodash.isElement';
+import isElement from 'lodash.iselement';
 
 export default class application {
 
