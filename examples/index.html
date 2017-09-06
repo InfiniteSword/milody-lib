@@ -1,13 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Example</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+        p {
+            position: absolute;
+            top: 20px;
+            left: 0;
+            right: 0;
+            text-align: center;
+            font-size: 20px;
+            color: #666;
+        }
+        div{
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            margin: auto;
+            width: 100px;
+            height: 30px;
+            text-align: center;
+            font-size: 20px;            
+        }
+        span {
+            cursor: pointer;  
+            color: #aaa;
+        }
+    </style>
 </head>
+
 <body>
-    example
-    <audio id="audio" src="http://localhost:3000/example.mp3" controls></audio>
+    <p>Music: Staring At My Journey - Sean Houston</p>
+    <div>
+        <span id="control">Loading</span>
+    </div>
+    <audio id="audio" src="http://45.62.98.10:8081/bgm_file-1500294011465.mp3" crossorigin="anonymous"></audio>
+    <canvas id="canvas"></canvas>
 </body>
+
 </html>
