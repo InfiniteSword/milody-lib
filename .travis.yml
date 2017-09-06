@@ -1,0 +1,15 @@
+language: node_js
+node_js:
+  - "node"
+branches:
+  only: master
+script:
+  - npm run build-doc
+after_script:
+  - cd dist
+  - git init
+  - git config user.name "InfiniteSword"
+  - git config user.email "misicdemone@gmail.com"
+  - git add .
+  - git commit -m "Travis build"
+  - git push --force --quiet "https://${GITHUB_TOKEN}@github.com/InfiniteSword/milody-lib.git" master:gh-pages
