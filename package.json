@@ -1,16 +1,28 @@
 {
-  "name": "milody-lib",
+  "name": "milody",
   "version": "0.0.1",
   "description": "A library of web audio api",
-  "main": "index.js",
+  "main": "src/application.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "webpack-dev-server --content-base test/ --open --inline --hot --client-log-level warning --compress --history-api-fallback --port 23333 --config build/webpack.dev.conf.js",    
     "build": "rm -rf ./dist && cross-env NODE_ENV=production webpack --config build/webpack.pro.conf.js --progress --hide-modules",
     "build-doc": "rm -rf ./dist && cross-env NODE_ENV=production webpack --config build/webpack.doc.conf.js --progress --hide-modules"
   },
+  "keywords": [
+    "milody",
+    "audio",
+    "js"
+  ],
   "author": "Misic",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/InfiniteSword/milody-lib.git"
+  },
+  "bugs": {
+    "url": "https://github.com/InfiniteSword/milody-lib/issues"
+  },
   "devDependencies": {
     "babel": "^6.23.0",
     "babel-core": "^6.26.0",
@@ -29,5 +41,8 @@
     "sass-loader": "^6.0.6",
     "style-loader": "^0.18.2",
     "url-loader": "^0.5.9"
+  },
+  "dependencies": {
+    "lodash.iselement": "4.1.1"
   }
 }
