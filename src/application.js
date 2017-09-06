@@ -22,6 +22,7 @@ export default class application {
         }
 
         this.nodes = [];
+        this.states = {};
         this.createAudio(input);
         this.createNodes();
     }
@@ -74,6 +75,21 @@ export default class application {
     use(node) {
         if (this.wholeNodes.includes(node)) {
             this.nodes.push(node);
+            this.states[node] = true;
+        }
+    }
+
+    /**
+     * Analyse if analyser has bean used.
+     *
+     * @api public
+     */
+    analyse() {
+        if (this.states['analyser']) {
+            let array = new Uint8Array(this.analyser.frequencyBinCount);
+            this.analyser.getByteFrequencyData(array);
+            this.dataArray = array;
+            return array;
         }
     }
 
@@ -89,6 +105,25 @@ export default class application {
         while (++i < this.nodes.length) {
             this[this.nodes[i - 1]].connect(this[this.nodes[i]]);
         }
+    }
+
+    /**
+     * Play the music.
+     *
+     * @api public
+     */
+    play() {
         this.audio.play();
+        this.states.playing = true;
+    }
+
+    /**
+     * Pause the music.
+     *
+     * @api public
+     */
+    pause() {
+        this.audio.pause();
+        this.states.playing = false;        
     }
 }
