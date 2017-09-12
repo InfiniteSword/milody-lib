@@ -67,15 +67,36 @@ export default class application {
     }
 
     /**
-     * Create Nodes.
+     * Add a Node to use.
      *
      * @param {String} node
      * @api public
      */
     use(node) {
         if (this.wholeNodes.includes(node)) {
-            this.nodes.push(node);
-            this.states[node] = true;
+            if(node === 'analyser'){
+                this.states[node] = true;
+            } else {
+                this.nodes.push(node);
+                this.states[node] = true;
+            }
+        }
+    }
+
+    /**
+     * Remove a Node from using.
+     *
+     * @param {String} node
+     * @api public
+     */
+    abandon(node) {
+        if (this.nodes.includes(node)) {
+            for (let i = 0, l = this.nodes.length; i < l; i++) {
+                if (this.nodes[i] === node) {
+                    this.nodes.splice(i, 1);
+                    this.states[node] = false;
+                }
+            }
         }
     }
 
@@ -94,16 +115,48 @@ export default class application {
     }
 
     /**
-     * Start application.
+     * Start the application.
      *
      * @api public
      */
     start() {
-        this.nodes.unshift('source');
-        this.nodes.push('destination');
+        let nodes = [];
+        this.nodes.forEach(n => {
+            nodes.push(n);
+        });
+        nodes.unshift('source');
+        if (this.states['analyser']){
+            nodes.push('analyser');
+        }
+        nodes.push('destination');
         let i = 0;
-        while (++i < this.nodes.length) {
-            this[this.nodes[i - 1]].connect(this[this.nodes[i]]);
+        while (++i < nodes.length) {
+            this[nodes[i - 1]].connect(this[nodes[i]]);
+        }
+    }
+
+    /**
+     * Restart the application.
+     *
+     * @api public
+     */
+    restart() {
+        let nodes = [];
+        let i = 0;        
+        this.nodes.forEach(n => {
+            nodes.push(n);
+        });
+        nodes.unshift('source');
+        if (this.states['analyser']){
+            nodes.push('analyser');
+        }
+        nodes.push('destination');
+        while (++i < nodes.length) {
+            this[nodes[i - 1]].disconnect();
+        }
+        i = 0;
+        while (++i < nodes.length) {
+            this[nodes[i - 1]].connect(this[nodes[i]]);
         }
     }
 
@@ -124,6 +177,6 @@ export default class application {
      */
     pause() {
         this.audio.pause();
-        this.states.playing = false;        
+        this.states.playing = false;
     }
 }
