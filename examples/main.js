@@ -4,6 +4,7 @@ import CircleAnimate from '@/CircleAnimate';
 const audio = document.querySelector('#audio');
 const canvas = document.querySelector('#canvas');
 const control = document.querySelector('#control');
+const biquad = document.querySelector('#biquad');
 
 let milody = new Milody(audio);
 milody.use('gain');
@@ -11,6 +12,18 @@ milody.gain.gain.value = 1;
 milody.use('analyser');
 milody.analyser.fftSize = 2048;
 milody.start();
+biquad.addEventListener('click', function(){
+    if (milody.states['biquadFilter']){
+        milody.abandon('biquadFilter');
+        milody.restart();
+        biquad.innerHTML = 'Use biquadFilter';
+    } else {
+        milody.use('biquadFilter');
+        milody.restart();
+        biquad.innerHTML = 'Abandon biquadFilter';
+    }
+});
+
 audio.addEventListener('canplaythrough', function(){
     milody.play();
     control.innerHTML = 'Pause';

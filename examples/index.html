@@ -36,11 +36,32 @@
             cursor: pointer;  
             color: #aaa;
         }
+        ul,li{
+            list-style: none;
+        }
+        .nav{
+            position: absolute;
+            left: 10px;
+            top: 20px;
+        }
+        .nav::before{
+            content: 'operations:'
+        }
+        .nav li{
+            display: inline-block;
+            font-size: 14px;
+            cursor: pointer;
+            margin-top: 10px;
+            color: #6cf;
+        }
     </style>
 </head>
 
 <body>
     <p>Music: Staring At My Journey - Sean Houston</p>
+    <ul class="nav">
+        <li id="biquad">Use biquadFilter</li>
+    </ul>
     <div>
         <span id="control">Loading</span>
     </div>
